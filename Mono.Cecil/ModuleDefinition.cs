@@ -684,26 +684,14 @@ namespace Mono.Cecil {
 			if (position > 0)
 				return GetNestedType (fullName);
 
-			string @namespace, name;
-			TypeParser.SplitFullName (fullName, out @namespace, out name);
-
-			return GetType (@namespace, name);
+			return ((TypeDefinitionCollection) this.Types).GetType (fullName);
 		}
 
 		public TypeDefinition GetType (string @namespace, string name)
 		{
 			Mixin.CheckName (name);
-			if (@namespace == null)
-				@namespace = string.Empty;
 
-			var types = this.Types;
-			for (int i = 0; i < types.Count; i++) {
-				var type = types [i];
-				if (type.Namespace == @namespace && type.Name == name)
-					return type;
-			}
-
-			return null;
+			return ((TypeDefinitionCollection) this.Types).GetType (@namespace ?? string.Empty, name);
 		}
 
 		public IEnumerable<TypeDefinition> GetTypes ()
