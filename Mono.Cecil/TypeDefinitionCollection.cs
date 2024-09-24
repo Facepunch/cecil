@@ -96,5 +96,13 @@ namespace Mono.Cecil {
 
 			return null;
 		}
+
+		public void RebuildNameCache ()
+		{
+			name_cache.Clear();
+
+			foreach (var type in this)
+				name_cache [new Slot (type.Namespace, type.Name)] = type;
+		}
 	}
 }

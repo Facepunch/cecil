@@ -694,6 +694,11 @@ namespace Mono.Cecil {
 			return ((TypeDefinitionCollection) this.Types).GetType (@namespace ?? string.Empty, name);
 		}
 
+		public void RebuildNameCache ()
+		{
+			((TypeDefinitionCollection) this.Types).RebuildNameCache ();
+		}
+
 		public IEnumerable<TypeDefinition> GetTypes ()
 		{
 			return GetTypes (Types);
